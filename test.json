@@ -5,9 +5,9 @@
 	"separator": ";",
 	"skip": 0,
 	"meta": [
-		{ "type": "id", "index": 0, "name": "header" }
+		{ "type": "id", "index": 0, "name": "Tissue" }
 	],
 	"sets": [
-		{ "format": "binary", "start": 1, "end": 3 }
+		{ "format": "binary", "start": 1, "end": 14 }
 	]
 }
