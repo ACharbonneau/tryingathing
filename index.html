@@ -1,44 +1,35 @@
 <html>
 <head>
-  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-  <script type="text/javascript">
-  google.charts.load('current', {
-    'packages': ['gantt']
+<script src="https://code.highcharts.com/gantt/highcharts-gantt.js"></script>
+
+<div id="container"></div>
+document.addEventListener('DOMContentLoaded', function() {
+  var myChart = Highcharts.chart('container', {
+    chart: {
+      type: 'bar'
+    },
+    title: {
+      text: 'Fruit Consumption'
+    },
+    xAxis: {
+      categories: ['Apples', 'Bananas', 'Oranges']
+    },
+    yAxis: {
+      title: {
+        text: 'Fruit eaten'
+      }
+    },
+    series: [{
+      name: 'Jane',
+      data: [1, 0, 4]
+    }, {
+      name: 'John',
+      data: [5, 7, 3]
+    }]
   });
-  google.charts.setOnLoadCallback(drawChart);
+});
 
-  // This converts milliseconds to days
-  function daysToMilliseconds(days) {
-    return days * 24 * 60 * 60 * 1000;
-  }
-
-
-  // This gets the data from my google sheet and calls the handleQueryResponse function
-  function drawChart() {
-    var query = new google.visualization.Query('https://docs.google.com/spreadsheets/d/1494kgMKtJ-G1XDbCidB2DfASIDYBzIcvB4kEulYDZe0/edit?usp=sharing');
-    query.send(handleQueryResponse);
-  }
-
-
-  // This loads the data, loads the chart type and calls the base drawing function
-  function handleQueryResponse(response) {
-    var options = {
-      height: 1100,
-      width: 2000,
-      gantt: {
-        defaultStartDateMillis: new Date(2019, 11, 1),
-        trackHeight: 25,
-        barHeight:20},
-    }
-    var data = response.getDataTable();
-    var chart = new google.visualization.Gantt(document.getElementById('chart_div'));
-    chart.draw(data, options);
-  }
-
-
-</script>
 </head>
 <body>
-<div id="chart_div"></div>
 </body>
 </html>
