@@ -20,36 +20,10 @@ html, body, #container {
   <script>
 // https://docs.google.com/spreadsheets/d/1FzX9tOlUnJZsat-wjZpj6nRjiGl7aXPt0j-8GyHM2Bk/
 anychart.data.loadGoogleSpreadsheet('1t0hn60d9iZd-4BRbt-F3GGJa3mGhkeJeeWDMs61xFZc', function (data) {
-    // create column chart
-    var chart = anychart.column();
-
-    // set chart title
-    chart.title('Winter Olympics, Top 10 Chart using Google Spreadsheet');
-
-    // set chart data
-    chart.data(data);
-
-    // set custom palette
-    chart.palette(['#cd8032', '#bdbdbd', 'gold']);
-
-    // axes titles
-    chart.xAxis().title('Country');
-    chart.yAxis().title('Points');
-
-    // set y-scale settings
-    chart.yScale()
-            // set scale minimum
-            .minimum(0)
-            // force chart to stack values by Y scale
-            .stackMode('value');
-
-    // set union tooltip
-    chart.tooltip().displayMode('union');
-
-    // set container id for the chart
-    chart.container('container');
-    // initiate chart drawing
-    chart.draw();
+var treeData = anychart.data.tree(data, "as-tree");
+var chart = anychart.ganttProject();
+chart.data(treeData);
+ 
 });
 </script>
 </body>
