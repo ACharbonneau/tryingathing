@@ -23,7 +23,7 @@ anychart.data.loadGoogleSpreadsheet('1t0hn60d9iZd-4BRbt-F3GGJa3mGhkeJeeWDMs61xFZ
 // set the input date/time format
 anychart.format.inputDateTimeFormat("yyyy-MM-dd");
 
-var treeData = anychart.data.tree(data, "as-table");
+var treeData = anychart.data.tree(data, "as-csv");
 var chart = anychart.ganttProject();
 chart.data(treeData);
  
