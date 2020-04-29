@@ -1,13 +1,9 @@
-
-
-
                      <html>
 <head>
-  <script src="https://cdn.anychart.com/samples/gantt-working-with-data/csv-data/data.js"></script>
   <script src="https://cdn.anychart.com/releases/v8/js/anychart-base.min.js?hcode=c11e6e3cfefb406e8ce8d99fa8368d33"></script>
   <script src="https://cdn.anychart.com/releases/v8/js/anychart-ui.min.js?hcode=c11e6e3cfefb406e8ce8d99fa8368d33"></script>
   <script src="https://cdn.anychart.com/releases/v8/js/anychart-exports.min.js?hcode=c11e6e3cfefb406e8ce8d99fa8368d33"></script>
-  <script src="https://cdn.anychart.com/releases/v8/js/anychart-gantt.min.js?hcode=c11e6e3cfefb406e8ce8d99fa8368d33"></script>
+  <script src="https://cdn.anychart.com/releases/v8/js/anychart-data-adapter.min.js?hcode=c11e6e3cfefb406e8ce8d99fa8368d33"></script>
   <link href="https://cdn.anychart.com/releases/v8/css/anychart-ui.min.css?hcode=c11e6e3cfefb406e8ce8d99fa8368d33" type="text/css" rel="stylesheet">
   <link href="https://cdn.anychart.com/releases/v8/fonts/css/anychart-font.min.css?hcode=c11e6e3cfefb406e8ce8d99fa8368d33" type="text/css" rel="stylesheet">
   <style type="text/css">
@@ -22,29 +18,38 @@ html, body, #container {
 <body>
   <div id="container"></div>
   <script>
-    anychart.data.loadGoogleSpreadsheet('1t0hn60d9iZd-4BRbt-F3GGJa3mGhkeJeeWDMs61xFZc', function (data) {
+// https://docs.google.com/spreadsheets/d/1FzX9tOlUnJZsat-wjZpj6nRjiGl7aXPt0j-8GyHM2Bk/
+anychart.data.loadGoogleSpreadsheet('1t0hn60d9iZd-4BRbt-F3GGJa3mGhkeJeeWDMs61xFZc', function (data) {
+    // create column chart
+    var chart = anychart.column();
 
-anychart.onDocumentReady(function () {
-    // The data used in this sample can be obtained from the CDN
-    // https://cdn.anychart.com/samples/gantt-working-with-data/csv-data/data.js
-    var data = getData();
-    // create data tree on raw data represented as table structure
-    var treeData = anychart.data.tree(data['csvData'], data['csvMapping'], data['csvSettings']);
+    // set chart title
+    chart.title('Winter Olympics, Top 10 Chart using Google Spreadsheet');
 
-    // create project gantt chart
-    var chart = anychart.ganttProject();
+    // set chart data
+    chart.data(data);
 
-    // set data for the chart
-    chart.data(treeData);
+    // set custom palette
+    chart.palette(['#cd8032', '#bdbdbd', 'gold']);
+
+    // axes titles
+    chart.xAxis().title('Country');
+    chart.yAxis().title('Points');
+
+    // set y-scale settings
+    chart.yScale()
+            // set scale minimum
+            .minimum(0)
+            // force chart to stack values by Y scale
+            .stackMode('value');
+
+    // set union tooltip
+    chart.tooltip().displayMode('union');
 
     // set container id for the chart
     chart.container('container');
-
     // initiate chart drawing
     chart.draw();
-
-    // zoom chart all dates range
-    chart.fitAll();
 });
 </script>
 </body>
