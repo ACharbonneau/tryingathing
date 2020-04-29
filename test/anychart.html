@@ -20,6 +20,9 @@ html, body, #container {
   <script>
 // https://docs.google.com/spreadsheets/d/1FzX9tOlUnJZsat-wjZpj6nRjiGl7aXPt0j-8GyHM2Bk/
 anychart.data.loadGoogleSpreadsheet('1t0hn60d9iZd-4BRbt-F3GGJa3mGhkeJeeWDMs61xFZc', function (data) {
+// set the input date/time format
+anychart.format.inputDateTimeFormat("yyyy-MM-dd");
+
 var treeData = anychart.data.tree(data, "as-table");
 var chart = anychart.ganttProject();
 chart.data(treeData);
